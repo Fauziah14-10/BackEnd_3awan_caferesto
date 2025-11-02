@@ -1,0 +1,15 @@
+# Abaikan virtual environment
+.venv/
+
+# Abaikan file sistem/editor
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Abaikan file VS Code (kalau pakai)
+.vscode/
+
+# Abaikan file environment lokal
+.env
