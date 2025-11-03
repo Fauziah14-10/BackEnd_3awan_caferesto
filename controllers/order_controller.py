@@ -144,7 +144,8 @@ def create_order():
             customer_id=customer_id,
             total_price=total_price,
             payment_method=body["payment_method"],
-            status="pending",
+            # Default status for customer-created orders set to 'diantar' per request
+            status="diantar",
             order_date=datetime.utcnow()
         )
         db.add(new_order)
