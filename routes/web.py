@@ -7,6 +7,7 @@ from controllers.customer_controller import (
     add_customer,
     update_customer,
     delete_customer,
+    login_customer,
 )
 from controllers.order_controller import (
     get_all_order,
@@ -39,6 +40,7 @@ web.route("/customers/<int:customer_id>", methods=["GET"])(get_customer_by_id)
 web.route("/customers", methods=["POST"])(add_customer)
 web.route("/customers/<int:customer_id>", methods=["PUT"])(update_customer)
 web.route("/customers/<int:customer_id>", methods=["DELETE"])(delete_customer)
+web.route("/customers/login", methods=["POST"])(login_customer)
 
 
 # --- ORDER endpoints ---

@@ -62,7 +62,38 @@ def get_all_customers():
         return jsonify(result)
     finally:
         db.close()
+        
+# --- POST: Login customer ---
+def login_customer():
+    db = SessionLocal()
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
 
+    if not email or not password:
+        return jsonify({"message": "Email dan password harus diisi"}), 400
+
+    customer = db.query(Customer).filter(Customer.email == email).first()
+
+    if not customer:
+        return jsonify({"message": "Email tidak ditemukan"}), 404
+
+    # Jika password disimpan dalam bentuk hash:
+    # if not check_password_hash(customer.password, password):
+    # Jika masih plain-text:
+    if customer.password != password:
+        return jsonify({"message": "Password salah"}), 401
+
+    return jsonify({
+        "message": "Login berhasil",
+        "customer": {
+            "customer_id": customer.customer_id,
+            "name_customer": customer.name_customer,
+            "email": customer.email,
+            "address": customer.address,
+            "phone": customer.phone
+        }
+    }), 200
 
 # --- GET: Customer berdasarkan ID ---
 def get_customer_by_id(customer_id):
